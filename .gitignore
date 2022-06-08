@@ -1,0 +1,4 @@
+snapshotvenv/
+db.sqlite3
+snapshot_result.json
+__pycache__/

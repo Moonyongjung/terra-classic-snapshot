@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="{% static 'js/result.js' %}"></script>    
+
+    <title>Snapshot Check</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Terra Token Snapshot</h1>
+        <form class="form" method="POST" action="{% url 'snapshot_main' %}">
+        {% csrf_token %}
+        <div style="width: 550px;">
+            Block Height : <input name="blockHeight" class="blockHeight" type="blockHeight" placeholder="blockHeight" style="margin: 10px 10px 10px 29px;width: 400px;">
+        </div>
+        <div style="width: 550px;">
+            Contract Address : <input name="contractAddress" class="contractAddress" type="contractAddress" placeholder="contractAddress" style="margin: 10px 10px 10px 0;width: 400px;">
+        </div>
+        <div style="width: 550px;">
+            Account Address : <input name="accountAddress" class="accountAddress" type="accountAddress" placeholder="accountAddress" style="margin: 10px 10px 10px 3px;width: 400px;">
+        </div>
+        <div align="center" style="width: 550px;">
+            <button type="submit" id="snapshot_info_submit" style="padding: 5px 50px 5px 50px">Submit</button>
+        </div>
+        </form>
+        <div style="margin: 20px 0px 0px 0px;">        
+            <p>If accountAddress is null, Retrieve all token holders' transactions</p>
+        </div>
+        {% if confirm == False %}
+        <div id="fail">
+            <br>
+            <p>Fail : {{ snapshot_info_val }} </p>
+        </div>
+        {% endif %}
+        {% if confirm == True %}
+        <div id="success">
+            <br>
+            <p>Result value is saved in the path(./result/snapshot_result.json) </p>
+            <li> Token Info : {{ snapshot_info_val }} </li>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
